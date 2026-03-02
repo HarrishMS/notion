@@ -1,0 +1,2 @@
+mythic_container>=0.1.4
+httpx>=0.25.0

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+venv/
+
+# Mythic runtime config (contains secrets)
+C2_Profiles/notion/c2_code/config.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
