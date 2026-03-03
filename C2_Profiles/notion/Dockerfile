@@ -1,12 +1,9 @@
-FROM python:3.11-slim
+FROM python:3.11
 
 WORKDIR /Mythic/
 
 COPY requirements.txt .
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
 
