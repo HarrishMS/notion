@@ -3,5 +3,8 @@
   "exclude_c2_profiles": false,
   "exclude_documentation_payload": true,
   "exclude_documentation_c2": false,
-  "exclude_agent_icons": true
+  "exclude_agent_icons": true,
+  "remote_images": {
+    "notion": "ghcr.io/0xbbuddha/notion-c2:latest"
+  }
 }
